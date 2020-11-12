@@ -22,7 +22,7 @@ $ make server
 
 - `POST /account`
 - Request Body parameters:
- - name (string)
+    - name (string)
 
 Response:
 ```
@@ -49,7 +49,7 @@ Response:
 
 - `POST /account/:id/deposit`
 - Request Body parameters:
- - amount (number)
+    - amount (number)
 - Pre-requisits: amount > 0
 
 Response:

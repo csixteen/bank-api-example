@@ -10,3 +10,22 @@ CREATE TABLE IF NOT EXISTS accounts (
 	balance DECIMAL(8, 2) DEFAULT 0,
 	PRIMARY KEY (id)
 ) CHARSET=utf8;
+
+
+-- Withdraw_money
+
+DROP PROCEDURE IF EXISTS Withdraw_money;
+
+DELIMITER //
+CREATE PROCEDURE Withdraw_money(IN account_id INT, IN amount DECIMAL)
+BEGIN
+	DECLARE i INT;
+
+	START TRANSACTION;
+	SELECT COUNT(*) INTO i FROM accounts WHERE id = account_id AND balance >= amount;
+	IF i > 0 THEN
+		UPDATE accounts SET balance = balance - amount WHERE id = account_id;
+	END IF;
+	COMMIT WORK;
+END//
+DELIMITER ;

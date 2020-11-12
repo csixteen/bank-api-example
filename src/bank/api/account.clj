@@ -79,7 +79,9 @@
 (defn withdraw-money
   [account_id amount]
   (api/checkp #(> amount 0) :amount "Withdraw amount must be greater than 0 (zero)")
-  (response {:account_id account_id, :amount amount}))
+  (let [r (jdbc/execute-one! @db-connection
+                             ["CALL Withdraw_money(?, ?)" account_id amount])]
+    (view-account account_id)))
 
 
 ;;;-------------------------------------------------

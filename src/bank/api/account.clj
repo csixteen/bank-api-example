@@ -1,29 +1,14 @@
 (ns bank.api.account
   "Account related route table and handlers."
-  (:require [clojure.string :as string]
-            [compojure
+  (:require [compojure
              [core :refer [defroutes GET POST]]]
             [honeysql
              [core :as sql]
              [helpers :refer :all :as h]]
             [next.jdbc :as jdbc]
             [ring.util.response :refer [response]]
-            [bank.db :refer [db-connection]]))
-
-
-(defn- sanitize-column
-  [col]
-  (let [col (str col)
-        i (string/index-of col \/)]
-    (if (nil? i)
-      col
-      (apply str (drop (+ i 1) col)))))
-
-(defn- sanitize-result
-  [res]
-  (reduce-kv (fn [m k v] (assoc m (sanitize-column k) v))
-             {}
-             res))
+            [bank.db :refer [db-connection]]
+            [bank.api.common :as api]))
 
 
 ;;;-------------------------------------------------
@@ -58,7 +43,7 @@
               (h/where [:= :id id])
               sql/format)
         r (jdbc/execute-one! @db-connection q)]
-    (response (sanitize-result r))))
+    (response (api/sanitize-result r))))
 
 
 ;;;-------------------------------------------------
@@ -72,6 +57,8 @@
 
 (defn make-deposit
   [account_id amount]
+  ; TODO - make this check a bit more generic, since it's repeated already
+  (api/checkp #(> amount 0) :amount "Deposit amount must be greater than 0 (zero)")
   (response {:account_id account_id, :amount amount}))
 
 
@@ -86,6 +73,7 @@
 
 (defn withdraw-money
   [account_id amount]
+  (api/checkp #(> amount 0) :amount "Withdraw amount must be greater than 0 (zero)")
   (response {:account_id account_id, :amount amount}))
 
 
@@ -96,6 +84,10 @@
 
 (defn transfer-money
   [src_id dst_id amount]
+  (api/checkp
+    #(not= src_id dst_id)
+    :dst_id
+    "Source and destination accounts must be different.")
   (response {:from_account src_id
              :to_account dst_id
              :amount amount}))

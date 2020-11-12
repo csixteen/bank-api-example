@@ -13,10 +13,32 @@ You will need [Leiningen][] 2.0.0 or above installed. This is also assuming that
 To start the server:
 
 ```clojure
+$ export DB_USER=foobar
+$ export DB_PASSWORD=secure_password
 $ make server
 ```
 
-## Endpoints
+## Configuration
+
+Database configuration can be hardcoded on `bank/config.clj` for the sake of simplicity:
+
+```clojure
+(def ^:private app-defaults
+  {:db-host     "amazing_database"
+   :db-port     3306
+   :db-user     "foobar"
+   :db-password "secure_password"
+   :db-name     "bank"})
+```
+
+You can also export those configuration values as environment variables:
+
+```
+export DB_USER=foobar
+export DB_PASSWORD=secure_password
+```
+
+# Endpoints
 
 ### Create a bank account
 

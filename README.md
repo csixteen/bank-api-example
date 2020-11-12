@@ -63,4 +63,10 @@ Response:
 
 # References
 - [Private def in Clojure](https://stackoverflow.com/questions/20443545/private-def-in-clojure-clojurescript)
-
+- [next.jdbc](https://github.com/seancorfield/next-jdbc)
+- [HoneySQL](https://github.com/seancorfield/honeysql)
+- [Ring](https://github.com/ring-clojure/ring)
+- [Compojure](https://github.com/weavejester/compojure)
+- [Lein Ring](https://github.com/weavejester/lein-ring)
+- [Clojure Getting Started](https://clojure.org/guides/getting_started)
+- [Clojure from the ground-up](https://aphyr.com/posts/301-clojure-from-the-ground-up-welcome)

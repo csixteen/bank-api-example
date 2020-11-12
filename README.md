@@ -42,7 +42,7 @@ export DB_PASSWORD=secure_password
 
 ### Create a bank account
 
-- `POST /account`
+- `POST /api/account`
 - Request Body parameters:
     - **name** (string)
 
@@ -56,7 +56,7 @@ Response:
 
 ### View a bank account
 
-- `GET /account/:id`
+- `GET /api/account/:id`
 
 Response:
 ```
@@ -69,7 +69,7 @@ Response:
 
 ### Deposit money to account
 
-- `POST /account/:id/deposit`
+- `POST /api/account/:id/deposit`
 - Request Body parameters:
     - **amount** (number)
 - Pre-requisits:
@@ -86,7 +86,7 @@ Response:
 
 ### Withdraw money from account
 
-- `POST /account/:id/withdraw`
+- `POST /api/account/:id/withdraw`
 - Request Body parameters:
     - **amount** (number)
 - Pre-requisits:
@@ -104,7 +104,7 @@ Response:
 
 ### Transfer money between accounts
 
-- `POST /account/:id/send`
+- `POST /api/account/:id/send`
 - Request Body parameters:
     - **amount** (number)
     - **account-number** (number)
@@ -121,7 +121,12 @@ Response:
 }
 ```
 
+### Retrieve account audit log (TODO)
+
+- `GET /api/account/:id/audit`
+
 # TODO
+- Account audit log endpoint.
 - Test the code.
 - Use proper map destructuring on the endpoint handlers to extract the request body parameters.
 - Document the code a bit better.

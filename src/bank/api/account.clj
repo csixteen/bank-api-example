@@ -59,7 +59,12 @@
   [account_id amount]
   ; TODO - make this check a bit more generic, since it's repeated already
   (api/checkp #(> amount 0) :amount "Deposit amount must be greater than 0 (zero)")
-  (response {:account_id account_id, :amount amount}))
+  (let [q (-> (h/update :accounts)
+              (h/sset {:balance (sql/call :+ :balance amount)})
+              (h/where [:= :id account_id])
+              sql/format)
+        r (jdbc/execute-one! @db-connection q)]
+    (view-account account_id)))
 
 
 ;;;-------------------------------------------------

@@ -22,7 +22,7 @@ $ make server
 
 - `POST /account`
 - Request Body parameters:
-    - *name* (string)
+    - **name** (string)
 
 Response:
 ```
@@ -49,9 +49,9 @@ Response:
 
 - `POST /account/:id/deposit`
 - Request Body parameters:
-    - *amount* (number)
+    - **amount** (number)
 - Pre-requisits:
-    - *amount* > 0
+    - **amount** > 0
 
 Response:
 ```
@@ -66,10 +66,10 @@ Response:
 
 - `POST /account/:id/withdraw`
 - Request Body parameters:
-    - *amount* (number)
+    - **amount** (number)
 - Pre-requisits:
-    - *amount* > 0
-    - account balance >= *amount*
+    - **amount** > 0
+    - account balance >= **amount**
 
 Response:
 ```
@@ -77,6 +77,25 @@ Response:
   "account-number": 1,
   "name": "Foobar",
   "balance": 95
+}
+```
+
+### Transfer money between accounts
+
+- `POST /account/:id/send`
+- Request Body parameters:
+    - **amount** (number)
+    - **account-number** (number)
+- Pre-requisits:
+    - **amount** > 0
+    - source account balane >= **amount**
+
+Response:
+```
+{
+  "account-number": 1,
+  "name": "Foobar",
+  "balance": 37.50
 }
 ```
 

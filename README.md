@@ -61,6 +61,12 @@ Response:
 }
 ```
 
+# TODO
+- Test the code.
+- Use proper map destructuring on the endpoint handlers to extract the request body parameters.
+- Document the code a bit better.
+- Find a way to remove the table namespace from the result set returned by `next.jdbc`.
+
 # References
 - [Private def in Clojure](https://stackoverflow.com/questions/20443545/private-def-in-clojure-clojurescript)
 - [next.jdbc](https://github.com/seancorfield/next-jdbc)

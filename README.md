@@ -1,14 +1,14 @@
 # bank-api
 
-FIXME
+Clojure exercise to create a simple RESTful API to manage bank accounts.
 
-## Prerequisites
+# Dependencies
 
 You will need [Leiningen][] 2.0.0 or above installed. This is also assuming that you have a MySQL compatible (e.g. MariaDB) database available.
 
 [leiningen]: https://github.com/technomancy/leiningen
 
-## Running
+# Running
 
 To start the server:
 
@@ -61,6 +61,6 @@ Response:
 }
 ```
 
-## References
+# References
 - [Private def in Clojure](https://stackoverflow.com/questions/20443545/private-def-in-clojure-clojurescript)
 

@@ -29,3 +29,25 @@ BEGIN
 	COMMIT WORK;
 END//
 DELIMITER ;
+
+
+-- Transfer money
+
+DROP PROCEDURE IF EXISTS Transfer_money;
+
+DELIMITER //
+CREATE PROCEDURE Transfer_money(IN src_account INT, IN dst_ACCOUNT INT, IN amount DECIMAL)
+BEGIN
+	DECLARE i INT;
+	DECLARE j INT;
+
+	START TRANSACTION;
+	SELECT COUNT(*) INTO i FROM accounts WHERE id = src_account AND balance >= amount;
+	SELECT COUNT(*) INTO j FROM accounts WHERE id = dst_account;
+	if i > 0 AND j > 0 THEN
+		UPDATE accounts SET balance = balance - amount WHERE id = src_account;
+		UPDATE accounts SET balance = balance + amount WHERE id = dst_account;
+	END IF;
+	COMMIT WORK;
+END//
+DELIMITER ;

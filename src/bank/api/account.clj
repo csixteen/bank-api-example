@@ -95,9 +95,9 @@
     #(not= src_id dst_id)
     :dst_id
     "Source and destination accounts must be different.")
-  (response {:from_account src_id
-             :to_account dst_id
-             :amount amount}))
+  (let [r (jdbc/execute-one! @db-connection
+                             ["CALL Transfer_money(?,?,?)" src_id dst_id amount])]
+    (view-account src_id)))
 
 
 ;;;+----------------------------------+
